@@ -7,6 +7,7 @@ class Server{
         this.app = express();
         this.port = process.env.PORT;
         this.usuariosPath = '/api/usuarios'
+        this.authPath = '/api/auth';
 
         //Concetar a base de datos
         this.conectarDB();
@@ -35,14 +36,17 @@ class Server{
     }
 
     routes(){
-        
+        // this.app.use( this.usuariosPath, require('../routes/usuarios'));
+        // this.app.use( this.authpath, require('../routes/auth')); 
         this.app.use('/api/usuarios',require('../routes/usuarios'));
+        this.app.use('/api/auth',require('../routes/auth'));
+        // this.app.use('/api/usuarios',require('../routes/usuarios'));
     }
 
     listen(){
         
         this.app.listen(this.port, ()=>{
-            console.log('Servidor corriendo en puerto', this.PORT)
+            console.log('Servidor corriendo en puerto', this.port)
         });
     }
 }
